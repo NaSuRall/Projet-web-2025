@@ -24,19 +24,23 @@ class GroupController extends Controller
 
 
 
+    // function qui va permettre de crée les groupes en fonction de la promotions
+    // et le nombre de personnes par groupes
     public function formCreate(Request $request) {
         $nombreUtilisateurs = User::count();
         $parGroupe = $request->input('number');
 
-        // verifie que le nombre recuperer est supperieur a 0
+
         if ($parGroupe <= 2) {
             return back()->with('error', 'Le nombre d’utilisateurs par groupe doit être supérieur à 2.');
         }
-        // arrondi le nombre au chiffre
-        $nombreGroupes = ceil($nombreUtilisateurs / $parGroupe);
 
-        $utilisateurs = User::all()->shuffle(); // melange la ici
+        $nombreGroupes = ceil($nombreUtilisateurs / $parGroupe);
+        $role = 'student';
+        $utilisateurs = User::where('type', $role)->get();
         $chunks = $utilisateurs->chunk($parGroupe);
+
+        // Nom du groupe
         $numero = 1;
 
         foreach ($chunks as $groupeUtilisateurs) {

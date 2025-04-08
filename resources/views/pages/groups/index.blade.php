@@ -24,21 +24,28 @@
 
 
 
-    @foreach ($groups as $groupe)
-        <div class="bg-white shadow-md rounded-lg p-4 mb-4">
-            <h2 class="text-xl font-semibold text-gray-800">{{ $groupe->name }}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m">
+        @foreach ($groups as $groupe)
+            <div class="bg-white p-6 rounded-lg shadow-xl">
+                <h2 class="text-1xl font-semibold text-gray-800 mb-4">{{ $groupe->name }}</h2>
 
-            @if ($groupe->users->isEmpty())
-                <p class="text-gray-500 mt-2">Aucun utilisateur dans ce groupe.</p>
-            @else
-                <ul class="list-disc pl-5 mt-2">
-                    @foreach ($groupe->users as $user)
-                        <li class="text-gray-700">{{ $user->first_name}} {{ $user->last_name }}</li>
-                    @endforeach
-                </ul>
-            @endif
-        </div>
-    @endforeach
+                @if ($groupe->users->isEmpty())
+                    <p class="text-gray-500">Aucun utilisateur dans ce groupe.</p>
+                @else
+                    <ul class="mt-4 space-y-3">
+                        @foreach ($groupe->users as $user)
+                            <li class="flex items-center space-x-3 text-gray-800">
+                                <div class="w-5 h-5 bg-blue-500 text-white rounded-full flex items-center justify-center">
+                                    <span class="font-bold">{{ strtoupper(substr($user->first_name, 0, 1)) }}</span>
+                                </div>
+                                <span class=" text-1xl  font-medium">{{ $user->first_name }} {{ $user->last_name }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+        @endforeach
+    </div>
 
 
 </x-app-layout>

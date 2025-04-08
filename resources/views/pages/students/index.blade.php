@@ -39,7 +39,7 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Date de naissance</span>
+                                                <span class="sort-label">Email </span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
@@ -47,39 +47,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($users as $user)
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>12/02/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
+                                        <td>{{ $user->first_name }}</td>
+                                        <td>{{ $user->last_name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>
+                                            <div class="flex flex-col items-center justify-between">
+                                                <a href="#">
+                                                    <i class="text-success ki-filled ki-shield-tick"></i>
+                                                </a>
 
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
+                                                <a class="hover:text-primary cursor-pointer" href="#"
+                                                   data-modal-toggle="#student-modal">
+                                                    <i class="ki-filled ki-cursor"></i>
+                                                </a>
+                                            </div>
+                                        </td>
                                         </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>02/12/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

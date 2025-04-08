@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
     public function index()
     {
-        return view('pages.students.index');
+        $users = User::all();
+        return view('pages.students.index', compact('users'));
     }
 }
