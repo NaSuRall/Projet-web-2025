@@ -28,13 +28,14 @@ class GroupController extends Controller
         $nombreUtilisateurs = User::count();
         $parGroupe = $request->input('number');
 
-        if ($parGroupe <= 0) {
-            return back()->with('error', 'Le nombre d’utilisateurs par groupe doit être supérieur à 0.');
+        // verifie que le nombre recuperer est supperieur a 0
+        if ($parGroupe <= 2) {
+            return back()->with('error', 'Le nombre d’utilisateurs par groupe doit être supérieur à 2.');
         }
-
+        // arrondi le nombre au chiffre
         $nombreGroupes = ceil($nombreUtilisateurs / $parGroupe);
 
-        $utilisateurs = User::all()->shuffle(); // Mélange ici
+        $utilisateurs = User::all()->shuffle(); // melange la ici
         $chunks = $utilisateurs->chunk($parGroupe);
         $numero = 1;
 

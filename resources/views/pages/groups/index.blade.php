@@ -17,8 +17,6 @@
             <option value="CodingFactoryParis">Coding Factory Paris</option>
         </x-forms.dropdown>
 
-        <x-forms.input type="date" name="date-end" :label="__('Fin de l\'année')" placeholder="" />
-
         <x-forms.primary-button>
             {{ __('Valider') }}
         </x-forms.primary-button>
@@ -27,19 +25,20 @@
 
 
     @foreach ($groups as $groupe)
-        <div>
-            <h2>{{ $groupe->name }}</h2>
+        <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+            <h2 class="text-xl font-semibold text-gray-800">{{ $groupe->name }}</h2>
 
             @if ($groupe->users->isEmpty())
-                <p>Aucun utilisateur dans ce groupe.</p>
+                <p class="text-gray-500 mt-2">Aucun utilisateur dans ce groupe.</p>
             @else
-                <ul>
+                <ul class="list-disc pl-5 mt-2">
                     @foreach ($groupe->users as $user)
-                        <li>{{ $user->first_name }}</li>
+                        <li class="text-gray-700">{{ $user->first_name }}</li>
                     @endforeach
                 </ul>
             @endif
         </div>
     @endforeach
+
 
 </x-app-layout>
