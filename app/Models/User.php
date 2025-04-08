@@ -25,6 +25,9 @@ class User extends Authenticatable
         'first_name',
         'email',
         'password',
+        'bilan_note',
+        'remember_token',
+        'type'
     ];
 
     /**
@@ -86,5 +89,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Group::class);
     }
+
+
 
 }

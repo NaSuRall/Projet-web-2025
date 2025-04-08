@@ -37,9 +37,10 @@ class DatabaseSeeder extends Seeder
             'first_name'    => 'Student',
             'email'         => 'student@codingfactory.com',
             'password'      => Hash::make('123456'),
+            'bilan_note'      => rand(0, 20),
         ]);
 
-        User::factory(5)->create();
+
 
         // Create the default school
         $school = School::create([
@@ -47,6 +48,13 @@ class DatabaseSeeder extends Seeder
             'name'      => 'Coding Factory',
         ]);
 
+        User::factory(30)->create()->each(function ($user) use ($school) {
+            UserSchool::create([
+                'user_id'   => $user->id,
+                'school_id' => $school->id,
+                'role'      => $user->type ?? 'student'
+            ]);
+        });
 
         $cohort = Cohort::create([
             'school_id' => $school->id,

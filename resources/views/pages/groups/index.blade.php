@@ -33,7 +33,7 @@
             @else
                 <ul class="list-disc pl-5 mt-2">
                     @foreach ($groupe->users as $user)
-                        <li class="text-gray-700">{{ $user->first_name }}</li>
+                        <li class="text-gray-700">{{ $user->first_name}} {{ $user->last_name }}</li>
                     @endforeach
                 </ul>
             @endif
