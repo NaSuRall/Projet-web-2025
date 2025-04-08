@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cohort;
 use App\Models\School;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -38,12 +39,29 @@ class DatabaseSeeder extends Seeder
             'password'      => Hash::make('123456'),
         ]);
 
+        User::factory(5)->create();
+
         // Create the default school
         $school = School::create([
             'user_id'   => $user->id,
             'name'      => 'Coding Factory',
         ]);
 
+
+        $cohort = Cohort::create([
+            'school_id' => $school->id,
+            'name' => 'CodingFactoryCergy',
+            'description' => 'coding Cergy',
+            'start_date'=> date('Y-m-d'),
+            'end_date' => date('Y-m-d'),
+        ]);
+        $cohort2 = Cohort::create([
+            'school_id' => $school->id,
+            'name' => 'CodingFactoryParis',
+            'description' => 'coding paris',
+            'start_date'=> date('Y-m-d'),
+            'end_date' => date('Y-m-d'),
+        ]);
         // Create the admin role
         UserSchool::create([
             'user_id'   => $admin->id,
@@ -64,5 +82,7 @@ class DatabaseSeeder extends Seeder
             'school_id' => $school->id,
             'role'      => 'student'
         ]);
+
+
     }
 }

@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
 
         // Groups
         Route::get('groups', [GroupController::class, 'index'])->name('group.index');
-
+        Route::post('groups', [GroupController::class, 'formCreate'])->name('formGroup.create');
         // Retro
         route::get('retros', [RetroController::class, 'index'])->name('retro.index');
 
