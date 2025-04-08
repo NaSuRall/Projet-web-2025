@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cohort;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
@@ -17,8 +18,11 @@ class GroupController extends Controller
      * @return Factory|View|Application|object
      */
     public function index() {
+
+
+        $promotions = Cohort::all();
         $groups = Group::with('users')->get();
-        return view('pages.groups.index', compact('groups'));
+        return view('pages.groups.index', compact('groups', 'promotions'));
     }
 
 
@@ -27,12 +31,17 @@ class GroupController extends Controller
     // function qui va permettre de crée les groupes en fonction de la promotions
     // et le nombre de personnes par groupes
     public function formCreate(Request $request) {
+        Group::where('created_at', '<', now())->delete();
+
+
         $nombreUtilisateurs = User::count();
         $parGroupe = $request->input('number');
 
 
-        if ($parGroupe <= 2) {
-            return back()->with('error', 'Le nombre d’utilisateurs par groupe doit être supérieur à 2.');
+        if ($parGroupe < 2) {
+            return redirect()->back()->withErrors(['groupe_error' => 'Le nombre d’utilisateurs par groupe doit être supérieur à 1.']);
+        } elseif ($parGroupe > 5) {
+            return redirect()->back()->withErrors(['groupe_error' => 'Le nombre d’utilisateurs par groupe doit être inférieur à 5.']);
         }
 
         $nombreGroupes = ceil($nombreUtilisateurs / $parGroupe);

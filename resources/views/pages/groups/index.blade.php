@@ -7,14 +7,19 @@
         </h1>
     </x-slot>
 
-
+    @if ($errors->has('groupe_error'))
+        <div class="alert alert-danger">
+            <h1 style="color: red">{{ $errors->first('groupe_error') }}</h1>
+        </div>
+    @endif
     <form class="card-body flex flex-row gap-5 align-middle bg-gray-100 w-[550px]" action="{{ route('formGroup.create') }}" method="POST">
         @csrf
         <x-forms.input type="number" name="number" :label="__('Nombre de personnes dans les groupes')" placeholder="2 - 5"/>
 
         <x-forms.dropdown type="promotion" :label="__('Promotions')">
-            <option value="CodingFactoryCergy">Coding Factory Cergy</option>
-            <option value="CodingFactoryParis">Coding Factory Paris</option>
+           @foreach($promotions as $promotion)
+                <option value="">{{ $promotion->name }}</option>
+            @endforeach
         </x-forms.dropdown>
 
         <x-forms.primary-button>
