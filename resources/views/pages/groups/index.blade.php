@@ -40,9 +40,6 @@
                     <ul class="mt-4 space-y-3">
                         @foreach ($groupe->users as $user)
                             <li class="flex items-center space-x-3 text-gray-800">
-                                <div class="w-5 h-5 bg-blue-500 text-white rounded-full flex items-center justify-center">
-                                    <span class="font-bold">{{ strtoupper(substr($user->first_name, 0, 1)) }}</span>
-                                </div>
                                 <span class=" text-1xl  font-medium">{{ $user->first_name }} {{ $user->last_name }}</span>
                             </li>
                         @endforeach
