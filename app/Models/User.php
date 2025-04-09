@@ -85,7 +85,6 @@ class User extends Authenticatable
             ->withPivot('role')
             ->first();
     }
-
     public function user_schools() {
         return $this->belongsToMany(UserSchool::class, 'users_schools');
     }
