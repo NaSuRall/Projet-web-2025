@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             'name'      => 'Coding Factory',
         ]);
 
-        User::factory(20)->create();
+        User::factory(100)->create();
 
 
         // Create the admin role

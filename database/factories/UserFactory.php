@@ -29,7 +29,7 @@ class UserFactory extends Factory
     {
 
         return [
-            'cohort' => fake()->randomElement(['B1', 'B2']),
+            'cohort' => fake()->randomElement(['B1', 'B2', 'B3', 'M1', 'M2']),
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),

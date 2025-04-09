@@ -7,65 +7,114 @@
         </h1>
     </x-slot>
 
-    <!-- Formulaire de sélection de promotion et nombre de personnes par groupe -->
-    <form action="{{ route('group.create') }}" method="GET">
-        @csrf
-        <x-forms.input type="number" name="number" :label="__('Number')" />
-
-        <x-forms.dropdown type="select" name="promotion" :label="__('Promotion')" >
-            <option value="B1">B1</option>
-            <option value="B2">B2</option>
-            <option value="B3">B3</option>
-            <option value="M1">M1</option>
-            <option value="M2">M2</option>
-        </x-forms.dropdown>
-
-        <x-forms.primary-button>
-            {{ __('Valider') }}
-        </x-forms.primary-button>
-    </form>
-
-    @if(isset($groups) && $groups->isNotEmpty())
-        <h2 class="mt-4 text-lg font-semibold">Groupes créés</h2>
-
-        <!-- Affichage des groupes par promotion -->
-        @foreach(['B1', 'B2', 'B3', 'M1', 'M2'] as $promotion)
-            <h3 class="mt-4 text-xl font-semibold">{{ $promotion }}</h3>
-
-            @php
-                $promotionGroups = $groups->where('promotion', $promotion);
-            @endphp
-
-            @if($promotionGroups->isNotEmpty())
-                <div class="overflow-x-auto mt-2">
-                    <table class="min-w-full table-auto border-collapse border border-gray-200">
-                        <thead class="bg-gray-100">
-                        <tr>
-                            <th class="px-4 py-2 border-b text-left">Nom</th>
-                            <th class="px-4 py-2 border-b text-left">Email</th>
-                            <th class="px-4 py-2 border-b text-left">Groupe</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($promotionGroups as $group)
-                            @foreach($group->users as $user)
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="px-4 py-2">{{ $user->first_name }} {{ $user->last_name }}</td>
-                                    <td class="px-4 py-2">{{ $user->email }}</td>
-                                    <td class="px-4 py-2">Groupe {{ $group->group_number }}</td>
-                                </tr>
-                            @endforeach
-                        @endforeach
-                        </tbody>
-                    </table>
+    <!-- begin: grid -->
+    <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
+        <div class="lg:col-span-2">
+            <div class="grid">
+                <div class="card card-grid h-full min-w-full">
+                    <div class="card-header">
+                        <h3 class="card-title">Mes Groupes</h3>
+                    </div>
+                    <div class="card-body">
+                        <div data-datatable="true" data-datatable-page-size="5">
+                            <div class="scrollable-x-auto">
+                                <table class="table table-border" data-datatable-table="true">
+                                    <thead>
+                                    <tr>
+                                        <th class="min-w-[280px]">
+                                            <span class="sort asc">
+                                                 <span class="sort-label">Nom</span>
+                                                 <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Promotion</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Groupe</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($groups as $group)
+                                        @foreach($group->users as $user)
+                                            <tr>
+                                                <td>
+                                                    <div class="flex flex-col gap-2">
+                                                        <span class="leading-none font-medium text-sm text-gray-900">
+                                                            {{ $user->first_name }} {{ $user->last_name }}
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $group->promotion }}</td>
+                                                <td>Groupe {{ $group->group_number }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                                <div class="flex items-center gap-2 order-2 md:order-1">
+                                    Show
+                                    <select class="select select-sm w-16" data-datatable-size="true" name="perpage"></select>
+                                    per page
+                                </div>
+                                <div class="flex items-center gap-4 order-1 md:order-2">
+                                    <span data-datatable-info="true"></span>
+                                    <div class="pagination" data-datatable-pagination="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            @else
-                <p class="mt-2 text-gray-500">Aucun groupe créé pour cette promotion.</p>
-            @endif
-        @endforeach
+            </div>
+        </div>
 
-    @else
-        <h2 class="text-center mt-4">Pas de promotion sélectionnée</h2>
-    @endif
+        <!-- Formulaire à droite avec position sticky -->
+        <div class="lg:col-span-1">
+            <div class="card h-full">
+                <div class="card-header">
+                    <h3 class="card-title">Ajouter un groupe</h3>
+                </div>
+                <div class="card-body flex flex-col gap-5">
+                    <!-- Formulaire -->
+                    <form action="{{ route('group.create') }}" method="GET">
+                        @csrf
+                        <x-forms.input
+                            type="number"
+                            name="number"
+                            :label="__('Numéro du Groupe')"
+                            class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        />
 
+                        <x-forms.dropdown
+                            name="promotion"
+                            :label="__('Promotion')"
+                            class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        >
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="B3">B3</option>
+                            <option value="M1">M1</option>
+                            <option value="M2">M2</option>
+                        </x-forms.dropdown>
+
+                        <div class="flex justify-center m-5">
+                            <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                {{ __('Valider') }}
+                            </x-forms.primary-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end: grid -->
 </x-app-layout>
