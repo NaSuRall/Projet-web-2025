@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cohort;
 use App\Models\School;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\UserSchool;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Psy\Util\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'first_name'    => 'Admin',
             'email'         => 'admin@codingfactory.com',
             'password'      => Hash::make('123456'),
+            'role'          => 'admin',
         ]);
 
         $teacher = User::create([
@@ -38,11 +41,15 @@ class DatabaseSeeder extends Seeder
             'password'      => Hash::make('123456'),
         ]);
 
+
         // Create the default school
         $school = School::create([
             'user_id'   => $user->id,
             'name'      => 'Coding Factory',
         ]);
+
+        User::factory(20)->create();
+
 
         // Create the admin role
         UserSchool::create([
@@ -63,6 +70,24 @@ class DatabaseSeeder extends Seeder
             'user_id'   => $user->id,
             'school_id' => $school->id,
             'role'      => 'student'
+        ]);
+
+
+        Cohort::create([
+            'school_id'   => $school->id,
+            'name'        => 'Coding Factory Cergy',
+            'description' => 'Coding Factory Cergy c\'est trop bien',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+
+        Cohort::create([
+            'school_id'   => $school->id,
+            'name'        => 'Coding Factory Paris',
+            'description' => 'Coding Factory Paris c\'est pas ouf',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
         ]);
     }
 }

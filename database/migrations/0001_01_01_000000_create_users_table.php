@@ -15,12 +15,15 @@ return new class extends Migration
             $table->engine = 'InnoDB';
 
             $table->id();
+            $table->enum('cohort', ['B1', 'B2', 'B3', 'M1', 'M2'])->nullable()->default(null);
             $table->string('last_name');
             $table->string('first_name');
             $table->string('birth_date')->nullable()->default(null);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('bilan_note')->nullable()->default(null);
+            $table->string('role')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
         });

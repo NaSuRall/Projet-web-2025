@@ -21,10 +21,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'cohort',
         'last_name',
         'first_name',
         'email',
         'password',
+        'bilan_note',
+        'role',
+//        'school_id'
     ];
 
     /**
@@ -80,5 +84,9 @@ class User extends Authenticatable
         return $this->belongsToMany(School::class, 'users_schools')
             ->withPivot('role')
             ->first();
+    }
+
+    public function user_schools() {
+        return $this->belongsToMany(UserSchool::class, 'users_schools');
     }
 }
