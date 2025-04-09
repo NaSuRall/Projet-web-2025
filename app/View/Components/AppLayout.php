@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Group;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
@@ -12,6 +13,7 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        $groups = Group::all();
+        return view('layouts.app', compact('groups'));
     }
 }

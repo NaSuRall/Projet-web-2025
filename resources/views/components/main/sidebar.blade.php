@@ -120,17 +120,52 @@
                         </span>
                     </a>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                       href="{{ route('group.index') }}">
-                        <span class="menu-icon items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
-                            <i class="ki-filled ki-abstract-36"></i>
+                @php
+                    $role = Auth::user()->role ?? null;
+                @endphp
+                @if(in_array($role, ['admin', 'teacher']))
+
+
+                    <div class="menu-item" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
+                        <div class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent">
+                        <span class="menu-icon items-start text-gray-600 text-lg menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
+                           <i class="ki-filled ki-abstract-36"></i>
                         </span>
-                        <span class="menu-title text-sm text-gray-800 font-medium menu-item-here:text-gray-900 menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
+                            <span class="menu-title font-medium text-sm text-gray-800 menu-item-here:text-gray-900 menu-item-show:text-gray-900 menu-link-hover:text-gray-900">
                             Groupes
                         </span>
-                    </a>
-                </div>
+                            <span class="menu-arrow text-gray-600 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800">
+                            <i class="ki-filled ki-down text-xs menu-item-show:hidden"></i>
+                            <i class="ki-filled ki-up text-xs hidden menu-item-show:inline-flex"></i>
+                        </span>
+                        </div>
+                        <div class="menu-accordion gap-px ps-7">
+                            <div class="menu-item">
+                                <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
+                                   href="{{ route('group.index') }}">
+                                <span class="menu-title text-2sm text-gray-800 menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
+                                    Toutes les groupes
+                                </span>
+                                </a>
+                            </div>
+                            <!-- @todo CETTE PARTIE EST A GENERER DEPUIS LA BDD -->
+
+                                                        @foreach($groups as $group)
+                                                            <div class="menu-item">
+                                                                <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
+                                                                   href="#">
+                                                           <span class="menu-title text-2sm text-gray-800 menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
+                                                               {{ $group->promotion }} - Number: {{ $group->group_number }}
+                                                           </span>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+
+
+                            <!-- FIN -->
+                        </div>
+                    </div>
+                @endif
                <div class="menu-item">
                     <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
                        href="{{ route('knowledge.index') }}">
@@ -153,9 +188,13 @@
                         </span>
                     </a>
                 </div>
+
             </div>
         </div>
+
+
     </div>
+
     <!-- End of Sidebar menu-->
     <!-- Footer -->
     <div class="flex flex-center justify-between shrink-0 ps-4 pe-3.5 mb-3.5" id="sidebar_footer">

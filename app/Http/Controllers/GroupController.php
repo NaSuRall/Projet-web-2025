@@ -32,7 +32,7 @@ class GroupController extends Controller
         $groupNumber = 1;
         $groupUsers = [];
 
-        foreach ($users as $index => $user) {
+        foreach ($users as  $user) {
             // Ajouter l'utilisateur dans un groupe jusqu'à ce que le groupe atteigne la taille spécifiée
             if (count($groupUsers) < $number) {
                 $groupUsers[] = $user;
