@@ -78,43 +78,67 @@
         </div>
 
         <!-- Formulaire à droite avec position sticky -->
-        <div class="lg:col-span-1">
-            <div class="card h-full">
-                <div class="card-header">
-                    <h3 class="card-title">Ajouter un groupe</h3>
-                </div>
-                <div class="card-body flex flex-col gap-5">
-                    <!-- Formulaire -->
-                    <form action="{{ route('group.create') }}" method="GET">
-                        @csrf
-                        <x-forms.input
-                            type="number"
-                            name="number"
-                            :label="__('Numéro du Groupe')"
-                            class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                        />
 
-                        <x-forms.dropdown
-                            name="promotion"
-                            :label="__('Promotion')"
-                            class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                        >
-                            <option value="B1">B1</option>
-                            <option value="B2">B2</option>
-                            <option value="B3">B3</option>
-                            <option value="M1">M1</option>
-                            <option value="M2">M2</option>
-                        </x-forms.dropdown>
 
-                        <div class="flex justify-center m-5">
-                            <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
-                                {{ __('Valider') }}
-                            </x-forms.primary-button>
-                        </div>
-                    </form>
+        @php
+            $role = Auth::user()->role ?? null;
+
+        @endphp
+
+        @if(in_array($role, ['admin', 'teacher']))
+            <div class="lg:col-span-1">
+                <div class="card h-full">
+                    <div class="card-header">
+                        <h3 class="card-title">Ajouter un groupe</h3>
+                    </div>
+                    <div class="card-body flex flex-col gap-5">
+                        <!-- Formulaire -->
+                        <form action="{{ route('group.create') }}" method="GET">
+                            @csrf
+                            <x-forms.input
+                                type="number"
+                                name="number"
+                                :label="__('Numéro du Groupe')"
+                                class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            />
+
+                            <x-forms.dropdown
+                                name="promotion"
+                                :label="__('Promotion')"
+                                class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            >
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="B3">B3</option>
+                                <option value="M1">M1</option>
+                                <option value="M2">M2</option>
+                            </x-forms.dropdown>
+
+                            <div class="flex justify-center m-5">
+                                <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                    {{ __('Valider') }}
+                                </x-forms.primary-button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+
+
+        @else
+            <div class="lg:col-span-1">
+                <div class="card h-full">
+                    <div class="card-header">
+                        <h3 class="card-title">Vous n'avez pas la permission de modifier les groupes....</h3>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+
+
+
+
     </div>
     <!-- end: grid -->
 </x-app-layout>

@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             'first_name'    => 'Teacher',
             'email'         => 'teacher@codingfactory.com',
             'password'      => Hash::make('123456'),
+            'role'          => 'teacher',
         ]);
 
         $user = User::create([
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'first_name'    => 'Student',
             'email'         => 'student@codingfactory.com',
             'password'      => Hash::make('123456'),
+            'role'          => 'student',
         ]);
 
 

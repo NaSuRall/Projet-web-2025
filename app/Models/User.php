@@ -88,4 +88,6 @@ class User extends Authenticatable
     public function user_schools() {
         return $this->belongsToMany(UserSchool::class, 'users_schools');
     }
+
+
 }
