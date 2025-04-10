@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Retro;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -15,6 +16,8 @@ class RetroController extends Controller
      * @return Factory|View|Application|object
      */
     public function index() {
-        return view('pages.retros.index');
+
+        $Allretros = Retro::all();
+        return view('pages.retros.index', compact('Allretros'));
     }
 }

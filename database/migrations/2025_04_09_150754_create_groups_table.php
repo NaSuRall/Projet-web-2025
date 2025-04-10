@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('promotion'); // Promotion (B1, B2, etc.)
-            $table->integer('group_number'); // Numéro du groupe
+            $table->string('promotion');
+            $table->integer('group_number');
             $table->timestamps();
         });
 

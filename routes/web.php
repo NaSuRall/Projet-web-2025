@@ -5,6 +5,7 @@ use App\Http\Controllers\CommonLifeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RetroController;
+use App\Http\Controllers\RetroTemplateController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\GroupController;
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
 
         // Retro
         route::get('retros', [RetroController::class, 'index'])->name('retro.index');
+        route::post('retros/create', [RetroTemplateController::class, 'create'])->name('retro.create');
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
