@@ -41,14 +41,16 @@
                                     </thead>
                                     <tbody>
                                     @foreach($Allretros as $Allretro)
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h1>{{ $Allretro->name }}</h1>
-                                            </div>
-                                            <div class="card-body">
-                                                <p>{{ $Allretro->promotion }}</p>
-                                            </div>
-                                        </div>
+                                        <tr>
+                                            <td>
+                                                <div class="flex flex-col gap-2">
+                                                        <span class="leading-none font-medium text-sm text-gray-900">
+                                                           <a href="{{ route('retro.show', ['id' => $Allretro->id]) }}">{{ $Allretro->name }}</a>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td>{{ $Allretro->promotion }}</td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
