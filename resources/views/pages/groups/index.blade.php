@@ -14,6 +14,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">Mes Groupes</h3>
+
                     </div>
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
@@ -39,6 +40,12 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Bilan note</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -54,6 +61,7 @@
                                                 </td>
                                                 <td>{{ $group->promotion }}</td>
                                                 <td>Groupe {{ $group->group_number }}</td>
+                                                <td>Note {{ $user->bilan_note }}</td>
                                             </tr>
                                         @endforeach
                                     @endforeach
@@ -98,7 +106,7 @@
                             <x-forms.input
                                 type="number"
                                 name="number"
-                                :label="__('Numéro du Groupe')"
+                                :label="__('Personnes par groups')"
                                 class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             />
 
@@ -122,7 +130,37 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="lg:col-span-1 mt-5">
+                    <div class="card h-full">
+                        <div class="card-header">
+                            <h3 class="card-title">Supprimer les groupe</h3>
+                        </div>
+                        <div class="card-body flex flex-col gap-5">
+                            <!-- Formulaire -->
+                            <form action="{{ route('group.clear') }}" method="post" >
+                                @csrf
+                                <x-forms.dropdown
+                                    name="promotion"
+                                    :label="__('Promotion')"
+                                    class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+
+                                >
+                                    <option value="B1">B1</option>
+                                    <option value="B2">B2</option>
+                                    <option value="B3">B3</option>
+                                    <option value="M1">M1</option>
+                                    <option value="M2">M2</option>
+                                </x-forms.dropdown>
+                                <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                    {{ __('Supprimer') }}
+                                </x-forms.primary-button>
+                            </form>
+                        </div>
+                    </div>
+
             </div>
+
 
 
         @else
@@ -134,10 +172,6 @@
                 </div>
             </div>
         @endif
-
-
-
-
 
     </div>
     <!-- end: grid -->

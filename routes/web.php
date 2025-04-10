@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
         // Groups
         Route::get('groups', [GroupController::class, 'index'])->name('group.index');
         Route::get('groups/promotions', [GroupController::class, 'create'])->name('group.create');
+        Route::post('groups/delete', [GroupController::class, 'clear'])->name('group.clear');
 
         // Retro
         route::get('retros', [RetroController::class, 'index'])->name('retro.index');

@@ -74,6 +74,13 @@ class GroupController extends Controller
 
 
 
+    public function clear(Request $request)
+    {
+        $promotion = $request->input('promotion');
+        Group::where('promotion', $promotion)->delete();
 
+        $groups = Group::all();
+        return view('pages.groups.index', compact('groups'));
+    }
 
 }
