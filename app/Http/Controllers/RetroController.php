@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cohort;
 use App\Models\Retro;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,8 +17,8 @@ class RetroController extends Controller
      * @return Factory|View|Application|object
      */
     public function index() {
-
         $Allretros = Retro::all();
-        return view('pages.retros.index', compact('Allretros'));
+        $cohorts = Cohort::all();
+        return view('pages.retros.index', compact('Allretros', 'cohorts'));
     }
 }

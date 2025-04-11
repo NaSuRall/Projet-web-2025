@@ -14,6 +14,20 @@
         </h1>
     </x-slot>
 
+    <h2 class="text-gray-600">Eleve dans la classe {{ $retro->promotion }} :</h2>
+    <ul>
+        @forelse($users as $user)
+            <li>{{ $user->first_name }} - {{ $user->last_name }} {{ $user->id }}</li>
+        @empty
+            <li>Aucun utilisateur trouvé pour ce cohort.</li>
+        @endforelse
+    </ul>
+
+
+
+
+
+
     <div id="myKanban" class="py-5"></div>
     <button id="addDefault">Add "Default" board</button>
     <br />

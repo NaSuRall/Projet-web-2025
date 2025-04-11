@@ -19,4 +19,9 @@ class UserCohort extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function cohort()
+    {
+        return $this->belongsTo(Cohort::class, 'cohorts_id');
+    }
 }

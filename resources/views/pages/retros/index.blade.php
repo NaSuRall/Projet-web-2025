@@ -94,15 +94,14 @@
 
                             <x-forms.dropdown
                                 name="promotion"
-                                :label="__('Pour quel promotion ?')"
+                                :label="__('Quel promotion ?')"
                                 class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-
                             >
-                                <option value="B1">B1</option>
-                                <option value="B2">B2</option>
-                                <option value="B3">B3</option>
-                                <option value="M1">M1</option>
-                                <option value="M2">M2</option>
+                                @foreach($cohorts as $cohort)
+                                    <option value="{{ $cohort->id  }}">{{ $cohort->name }}</option>
+                                @endforeach
+
+
                             </x-forms.dropdown>
 
                             <input type="hidden" name="creator_id" value="{{ auth()->user()->id }}">

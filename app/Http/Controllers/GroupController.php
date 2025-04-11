@@ -22,25 +22,25 @@ class GroupController extends Controller
     }
 
     public function create(Request $request) {
+
         $promotion = $request->input('promotion');
+
         $number = $request->input('number');
         $users = UserCohort::where('cohorts_id', $promotion)->get();
 
 
 
-        // Supprimer les groupes existants pour cette promotion
-        Group::where('promotion', $promotion)->delete();
+        // Supprimer les groupes
+      Group::where('promotion', $promotion)->delete();
 
-        // Créer des groupes pour les utilisateurs de cette promotion
+        // Créer des groupes
         $groupNumber = 1;
         $groupUsers = [];
 
         foreach ($users as  $user) {
-            // Ajouter l'utilisateur dans un groupe jusqu'à ce que le groupe atteigne la taille spécifiée
             if (count($groupUsers) < $number) {
                 $groupUsers[] = $user;
             } else {
-                // Sauvegarder le groupe et en créer un nouveau
                 $group = Group::create([
                     'promotion' => $promotion,
                     'group_number' => $groupNumber,
@@ -50,13 +50,13 @@ class GroupController extends Controller
                     $group->users()->attach($groupUser);
                 }
 
-                // Réinitialiser le tableau des utilisateurs pour le prochain groupe
+                // Reinitiallise le tableau
                 $groupUsers = [$user];
                 $groupNumber++;
             }
         }
 
-        // Sauvegarder le dernier groupe si nécessaire
+
         if (!empty($groupUsers)) {
             $group = Group::create([
                 'promotion' => $promotion,
@@ -68,7 +68,7 @@ class GroupController extends Controller
             }
         }
 
-        // Récupérer tous les groupes pour l'affichage après la soumission
+        // Récupérer tous les groups
         $groups = Group::all();
         $schools = Cohort::all();
         $cohorts = Cohort::all();

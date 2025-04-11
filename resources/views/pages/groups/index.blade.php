@@ -63,7 +63,7 @@
                                                 <td>Groupe {{ $group->group_number }}</td>
 
 
-                                                <td>Note {{ $user->bilan_note }}</td>
+                                                <td>{{ $user->id }}</td>
                                             </tr>
                                         @endforeach
                                     @endforeach
