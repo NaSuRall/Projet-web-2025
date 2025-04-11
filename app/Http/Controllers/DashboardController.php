@@ -9,7 +9,6 @@ class DashboardController extends Controller
 {
     public function index() {
         $userRole = auth()->user()->school()->pivot->role;
-        $groups = Group::all();
-        return view('pages.dashboard.dashboard-' . $userRole, compact('groups'));
+        return view('pages.dashboard.dashboard-' . $userRole, );
     }
 }

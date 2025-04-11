@@ -149,17 +149,19 @@
                                 </a>
                             </div>
                             <!-- @todo CETTE PARTIE EST A GENERER DEPUIS LA BDD -->
-
-                                                        @foreach($groups as $group)
-                                                            <div class="menu-item">
-                                                                <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                                                                   href="#">
-                                                           <span class="menu-title text-2sm text-gray-800 menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
-                                                               {{ $group->promotion }} - Number: {{ $group->group_number }}
-                                                           </span>
-                                                                </a>
-                                                            </div>
-                                                        @endforeach
+                                @php
+                                        $lastGroup = $groups->last();
+                                @endphp
+                            @if($lastGroup)
+                                <div class="menu-item">
+                                    <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
+                                       href="#">
+                                        <span class="menu-title text-2sm text-gray-800 menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
+                                            {{ $lastGroup->promotion }} - Groups : {{ $lastGroup->group_number }}
+                                        </span>
+                                    </a>
+                                </div>
+                            @endif
 
 
                             <!-- FIN -->

@@ -6,6 +6,7 @@ use App\Models\Cohort;
 use App\Models\School;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\UserCohort;
 use App\Models\UserSchool;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -45,9 +46,14 @@ class DatabaseSeeder extends Seeder
 
 
         // Create the default school
-        $school = School::create([
+        $schoolCergy = School::create([
             'user_id'   => $user->id,
-            'name'      => 'Coding Factory',
+            'name'      => 'Coding Factory Cergy',
+        ]);
+
+        $schoolParis = School::create([
+            'user_id'   => $user->id,
+            'name'      => 'Coding Factory Paris',
         ]);
 
         User::factory(100)->create();
@@ -56,40 +62,130 @@ class DatabaseSeeder extends Seeder
         // Create the admin role
         UserSchool::create([
             'user_id'   => $admin->id,
-            'school_id' => $school->id,
+            'school_id' => $schoolCergy->id,
             'role'      => 'admin'
         ]);
 
         // Create the teacher role
         UserSchool::create([
             'user_id'   => $teacher->id,
-            'school_id' => $school->id,
+            'school_id' => $schoolCergy->id,
             'role'      => 'teacher'
         ]);
 
         // Create the student role
         UserSchool::create([
             'user_id'   => $user->id,
-            'school_id' => $school->id,
+            'school_id' => $schoolCergy->id,
             'role'      => 'student'
         ]);
 
 
         Cohort::create([
-            'school_id'   => $school->id,
-            'name'        => 'Coding Factory Cergy',
-            'description' => 'Coding Factory Cergy c\'est trop bien',
+            'school_id'   => $schoolCergy->id,
+            'name'        => 'B1 Cergy',
+            'description' => 'Desctiption: B1',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+       $cohort = Cohort::create([
+            'school_id'   => $schoolParis->id,
+            'name'        => 'B1 Paris',
+            'description' => 'Desctiption: B1',
             'start_date'  => date('Y-m-d'),
             'end_date'  => date('Y-m-d'),
         ]);
 
 
         Cohort::create([
-            'school_id'   => $school->id,
-            'name'        => 'Coding Factory Paris',
-            'description' => 'Coding Factory Paris c\'est pas ouf',
+            'school_id'   => $schoolCergy->id,
+            'name'        => 'B2 Cergy',
+            'description' => 'Desctiption: B2',
             'start_date'  => date('Y-m-d'),
             'end_date'  => date('Y-m-d'),
         ]);
+
+        Cohort::create([
+            'school_id'   => $schoolParis->id,
+            'name'        => 'B2 Paris',
+            'description' => 'Desctiption: B2',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+
+        Cohort::create([
+            'school_id'   => $schoolCergy->id,
+            'name'        => 'B3 Cergy',
+            'description' => 'Desctiption: B3',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+        Cohort::create([
+            'school_id'   => $schoolParis->id,
+            'name'        => 'B3 Paris',
+            'description' => 'Desctiption: B3',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+        Cohort::create([
+            'school_id'   => $schoolCergy->id,
+            'name'        => 'M1 Cergy',
+            'description' => 'Desctiption: M1',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+        Cohort::create([
+            'school_id'   => $schoolParis->id,
+            'name'        => 'M1 Paris',
+            'description' => 'Desctiption: M1',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+
+        Cohort::create([
+            'school_id'   => $schoolCergy->id,
+            'name'        => 'M2 Cergy',
+            'description' => 'Desctiption: M2',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+        Cohort::create([
+            'school_id'   => $schoolParis->id,
+            'name'        => 'M2 Paris',
+            'description' => 'Desctiption: M2',
+            'start_date'  => date('Y-m-d'),
+            'end_date'  => date('Y-m-d'),
+        ]);
+
+
+        UserCohort::create([
+            'user_id'   => $user->id,
+            'cohorts_id' => $cohort->id,
+        ]);
+
+        UserCohort::create([
+            'user_id'   => $teacher->id,
+            'cohorts_id' => $cohort->id,
+        ]);
+
+        $cohorts = Cohort::all(); // Récupère toutes les cohortes
+
+        User::factory(100)->create()->each(function ($user) use ($cohorts) {
+            // Choisit une cohorte aléatoire
+            $randomCohort = $cohorts->random();
+
+            // Crée l'association dans la table pivot
+            UserCohort::create([
+                'user_id'    => $user->id,
+                'cohorts_id' => $randomCohort->id,
+            ]);
+        });
     }
 }
