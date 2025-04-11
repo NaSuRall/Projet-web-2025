@@ -89,6 +89,7 @@
 <script src="{{ asset('metronic/vendors/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('metronic/js/widgets/general.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jkanban@1.3.1/dist/jkanban.min.js"></script>
+
 <!-- End of Scripts -->
 </body>
 </html>

@@ -61,6 +61,8 @@
                                                 </td>
                                                 <td>{{ $group->promotion }}</td>
                                                 <td>Groupe {{ $group->group_number }}</td>
+
+
                                                 <td>Note {{ $user->bilan_note }}</td>
                                             </tr>
                                         @endforeach
