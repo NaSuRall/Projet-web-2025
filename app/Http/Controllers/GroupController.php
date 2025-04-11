@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Cohort;
 use App\Models\Group;
 use App\Models\User;
+use App\Models\UserCohort;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -14,16 +15,18 @@ class GroupController extends Controller
      * @return \Illuminate\Contracts\View\View
      */
     public function index() {
-        $schools = Cohort::all();
+        $cohorts = Cohort::all();
         $users = collect();
         $groups = Group::all();
-        return view('pages.groups.index', compact('schools', 'users', 'groups'));
+        return view('pages.groups.index', compact('cohorts', 'users', 'groups'));
     }
 
     public function create(Request $request) {
         $promotion = $request->input('promotion');
         $number = $request->input('number');
-        $users = User::where('cohort', $promotion)->get();
+        $users = UserCohort::where('cohorts_id', $promotion)->get();
+
+
 
         // Supprimer les groupes existants pour cette promotion
         Group::where('promotion', $promotion)->delete();
@@ -68,8 +71,8 @@ class GroupController extends Controller
         // Récupérer tous les groupes pour l'affichage après la soumission
         $groups = Group::all();
         $schools = Cohort::all();
-
-        return view('pages.groups.index', compact('schools', 'users', 'groups'));
+        $cohorts = Cohort::all();
+        return view('pages.groups.index', compact('schools', 'users', 'groups', 'cohorts'));
     }
 
 
