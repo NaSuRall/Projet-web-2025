@@ -174,5 +174,18 @@ class DatabaseSeeder extends Seeder
             'user_id'   => $teacher->id,
             'cohorts_id' => $cohort->id,
         ]);
+
+        $cohorts = Cohort::all(); // Récupère toutes les cohortes
+
+        User::factory(100)->create()->each(function ($user) use ($cohorts) {
+            // Choisit une cohorte aléatoire
+            $randomCohort = $cohorts->random();
+
+            // Crée l'association dans la table pivot
+            UserCohort::create([
+                'user_id'    => $user->id,
+                'cohorts_id' => $randomCohort->id,
+            ]);
+        });
     }
 }
