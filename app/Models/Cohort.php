@@ -14,8 +14,11 @@ class Cohort extends Model
 //        return $this->hasMany(User::class);
 //    }
 
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_cohorts', 'cohorts_id', 'user_id');
     }
+
+
 }

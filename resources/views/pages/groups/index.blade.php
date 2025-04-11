@@ -42,7 +42,7 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Bilan note</span>
+                                                <span class="sort-label">user id</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
@@ -118,7 +118,7 @@
                                 class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             >
                                 @foreach($cohorts as $cohort)
-                                    <option value="{{ $cohort->id  }}">{{ $cohort->name }}</option>
+                                    <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
                                 @endforeach
 
 
@@ -148,11 +148,9 @@
                                     class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
 
                                 >
-                                    <option value="B1">B1</option>
-                                    <option value="B2">B2</option>
-                                    <option value="B3">B3</option>
-                                    <option value="M1">M1</option>
-                                    <option value="M2">M2</option>
+                                    @foreach($cohorts as $cohort)
+                                        <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
+                                    @endforeach
                                 </x-forms.dropdown>
                                 <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                     {{ __('Supprimer') }}

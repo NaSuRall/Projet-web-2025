@@ -16,11 +16,7 @@ class RetroTemplateController extends Controller
     {
         $retro = Retro::findOrFail($id);
         $cohort = Cohort::find($retro->cohort_id);
-
-
         $users = User::whereIn('id', UserCohort::where('cohorts_id', $retro->promotion)->pluck('user_id'))->get();
-
-
 
         return view('pages.retros.retro-template', compact('retro','cohort', 'users'));
     }
