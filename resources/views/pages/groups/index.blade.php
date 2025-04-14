@@ -14,7 +14,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">Mes Groupes</h3>
-
+                    <!-- FORM POUR FILTER PROMOTION -->
                         <form method="GET" action="{{ route('group.index') }}" class="mb-4 flex justify-center">
                             <select name="promotion" id="promotion" class="select select-sm w-48">
                                 <option value="">Toutes les promotions</option>
@@ -24,9 +24,16 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <button type="submit" class="btn btn-sm btn-primary ml-2">Filtrer</button>
+                            <button type="submit" class="btn btn-primary">Filter</button>
                         </form>
 
+                    <!-- FORM POUR RECHERCHE BAR -->
+                        <form method="GET" action="{{ route('group.index') }}" class="mb-4 flex gap-2">
+                            <input type="text" name="search" placeholder="Rechercher un utilisateur..."
+                                   value="{{ request('search') }}"
+                                   class="input input-bordered w-full max-w-xs" />
+                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                        </form>
 
                     </div>
                     <div class="card-body">
@@ -74,10 +81,9 @@
                                                 </td>
                                                 <td>{{ $group->promotion }}</td>
                                                 <td>Groupe {{ $group->group_number }}</td>
-
-
                                                 <td>{{ $user->id }}</td>
                                             </tr>
+
                                         @endforeach
                                     @endforeach
                                     </tbody>

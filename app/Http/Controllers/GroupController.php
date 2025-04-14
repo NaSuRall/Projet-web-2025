@@ -20,7 +20,7 @@ class GroupController extends Controller
         $cohorts = Cohort::all();
         $users = collect();
         $groups = Group::all();
-
+        $search = $request->input('search');
         //filter les promos
         if ($promotionId) {
             $groups = Group::where('promotion', $promotionId)->get();
@@ -28,7 +28,18 @@ class GroupController extends Controller
             $groups = Group::all();
         }
 
-        return view('pages.groups.index', compact('cohorts', 'users', 'groups'));
+        if ($search) {
+
+            // recherche pour sql aussi avec % 'Like en sql'
+            $groupSearch = Group::whereHas('users', function ($query) use ($search) {
+                $query->where('first_name', 'like', "%$search%")
+                    ->orWhere('last_name', 'like', "%$search%");
+            })->get();
+        } else {
+            $groupSearch = Group::all();
+        }
+
+        return view('pages.groups.index', compact('cohorts', 'users','groups','groupSearch'));
     }
 
     public function create(Request $request)
