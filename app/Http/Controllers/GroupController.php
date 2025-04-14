@@ -15,11 +15,18 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index() {
+    public function index(Request $request) {
+        $promotionId = $request->input('promotion');
         $cohorts = Cohort::all();
         $users = collect();
         $groups = Group::all();
 
+        //filter les promos
+        if ($promotionId) {
+            $groups = Group::where('promotion', $promotionId)->get();
+        } else {
+            $groups = Group::all();
+        }
 
         return view('pages.groups.index', compact('cohorts', 'users', 'groups'));
     }

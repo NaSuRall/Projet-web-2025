@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
         Route::get('groups/promotions', [GroupController::class, 'create'])->name('group.create');
         Route::post('groups/delete', [GroupController::class, 'clear'])->name('group.clear');
 
+
         // Retro
         route::get('retros', [RetroController::class, 'index'])->name('retro.index');
         route::post('retros/create', [RetroTemplateController::class, 'create'])->name('retro.create');

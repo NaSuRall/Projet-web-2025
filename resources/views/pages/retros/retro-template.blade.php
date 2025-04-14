@@ -15,13 +15,13 @@
     </x-slot>
 
     <h2 class="text-gray-600">Eleve dans la classe {{ $retro->promotion }} :</h2>
-    <ul>
-        @forelse($users as $user)
-            <li>{{ $user->first_name }} - {{ $user->last_name }} {{ $user->id }}</li>
-        @empty
-            <li>Aucun utilisateur trouvé pour ce cohort.</li>
-        @endforelse
-    </ul>
+{{--    <ul>--}}
+{{--        @forelse($users as $user)--}}
+{{--            <li>{{ $user->first_name }} - {{ $user->last_name }} {{ $user->id }}</li>--}}
+{{--        @empty--}}
+{{--            <li>Aucun utilisateur trouvé pour ce cohort.</li>--}}
+{{--        @endforelse--}}
+{{--    </ul>--}}
 
 
 
@@ -29,15 +29,15 @@
 
 
     <div id="myKanban" class="py-5"></div>
-    <button id="addDefault">Add "Default" board</button>
-    <br />
-    <button id="addToDo">Add element in "To Do" Board</button>
-    <br />
-    <button id="addToDoAtPosition">Add element in "To Do" Board at position 2</button>
-    <br />
-    <button id="removeBoard">Remove "Done" Board</button>
-    <br />
-    <button id="removeElement">Remove "My Task Test"</button>
+{{--    <button id="addDefault">Add "Default" board</button>--}}
+{{--    <br />--}}
+{{--    <button id="addToDo">Add element in "To Do" Board</button>--}}
+{{--    <br />--}}
+{{--    <button id="addToDoAtPosition">Add element in "To Do" Board at position 2</button>--}}
+{{--    <br />--}}
+{{--    <button id="removeBoard">Remove "Done" Board</button>--}}
+{{--    <br />--}}
+{{--    <button id="removeElement">Remove "My Task Test"</button>--}}
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var KanbanTest = new jKanban({
@@ -88,7 +88,7 @@
                     boards: [
                         {
                             id: "_todo",
-                            title: "To Do (Can drop item only in working)",
+                            title: "{{ $retro->name }}",
                             class: "info,good",
                             dragTo: ["_working"],
                             item: [
@@ -147,21 +147,18 @@
                     ]
                 });
 
-
                 var toDoButton = document.getElementById("addToDo");
                 toDoButton.addEventListener("click", function() {
                     KanbanTest.addElement("_todo", {
                         title: "Test Add"
                     });
                 });
-
                 var toDoButtonAtPosition = document.getElementById("addToDoAtPosition");
                 toDoButtonAtPosition.addEventListener("click", function() {
                     KanbanTest.addElement("_todo", {
                         title: "Test Add at Pos"
                     }, 1);
                 });
-
                 var addBoardDefault = document.getElementById("addDefault");
                 addBoardDefault.addEventListener("click", function() {
                     KanbanTest.addBoards([
@@ -182,18 +179,14 @@
                         }
                     ]);
                 });
-
-
                 var removeBoard = document.getElementById("removeBoard");
                 removeBoard.addEventListener("click", function() {
                     KanbanTest.removeBoard("_done");
                 });
-
                 var removeElement = document.getElementById("removeElement");
                 removeElement.addEventListener("click", function() {
                     KanbanTest.removeElement("_test_delete");
                 });
-
                 var allEle = KanbanTest.getBoardElements("_todo");
                 allEle.forEach(function(item, index) {
                     //console.log(item);

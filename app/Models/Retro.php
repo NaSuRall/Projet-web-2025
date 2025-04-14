@@ -14,4 +14,6 @@ class Retro extends Model
         'promotion',
         'creator_id',
     ];
+
+
 }

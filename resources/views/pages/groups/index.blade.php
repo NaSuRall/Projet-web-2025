@@ -7,13 +7,26 @@
         </h1>
     </x-slot>
 
-    <!-- begin: grid -->
     <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
         <div class="lg:col-span-2">
+
             <div class="grid">
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">Mes Groupes</h3>
+
+                        <form method="GET" action="{{ route('group.index') }}" class="mb-4 flex justify-center">
+                            <select name="promotion" id="promotion" class="select select-sm w-48">
+                                <option value="">Toutes les promotions</option>
+                                @foreach ($cohorts as $cohort)
+                                    <option value="{{ $cohort->id }}" {{ request('promotion') == $cohort->id ? 'selected' : '' }}>
+                                        {{ $cohort->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-primary ml-2">Filtrer</button>
+                        </form>
+
 
                     </div>
                     <div class="card-body">
@@ -83,18 +96,15 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- Formulaire à droite avec position sticky -->
-
 
         @php
             $role = Auth::user()->role ?? null;
-
         @endphp
-
         @if(in_array($role, ['admin', 'teacher']))
             <div class="lg:col-span-1">
                 <div class="card h-full">
@@ -111,7 +121,6 @@
                                 :label="__('Personnes par groups')"
                                 class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             />
-
                             <x-forms.dropdown
                                 name="promotion"
                                 :label="__('Promotion')"
@@ -120,10 +129,7 @@
                                 @foreach($cohorts as $cohort)
                                     <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
                                 @endforeach
-
-
                             </x-forms.dropdown>
-
                             <div class="flex justify-center m-5">
                                 <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                     {{ __('Valider') }}
@@ -139,7 +145,7 @@
                             <h3 class="card-title">Supprimer les groupe</h3>
                         </div>
                         <div class="card-body flex flex-col gap-5">
-                            <!-- Formulaire -->
+
                             <form action="{{ route('group.clear') }}" method="post" >
                                 @csrf
                                 <x-forms.dropdown
@@ -174,5 +180,6 @@
         @endif
 
     </div>
+</div>
     <!-- end: grid -->
 </x-app-layout>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cohort;
 use App\Models\Liste;
 use App\Models\Retro;
+use App\Models\Task;
 use App\Models\User;
 use App\Models\UserCohort;
 use Illuminate\Http\Request;
@@ -17,6 +18,9 @@ class RetroTemplateController extends Controller
         $retro = Retro::findOrFail($id);
         $cohort = Cohort::find($retro->cohort_id);
         $users = User::whereIn('id', UserCohort::where('cohorts_id', $retro->promotion)->pluck('user_id'))->get();
+
+
+
 
         return view('pages.retros.retro-template', compact('retro','cohort', 'users'));
     }
@@ -33,4 +37,7 @@ class RetroTemplateController extends Controller
         ]);
         return redirect()->back()->with(compact('users'));
     }
+
+
+
 }
