@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Group;
+use App\Models\Retro;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
@@ -14,6 +15,7 @@ class AppLayout extends Component
     public function render(): View
     {
         $groups = Group::all();
-        return view('layouts.app', compact('groups'));
+        $retro = Retro::all();
+        return view('layouts.app', compact('groups', 'retro'));
     }
 }

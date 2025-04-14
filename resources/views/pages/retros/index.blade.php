@@ -16,7 +16,7 @@
             <div class="grid">
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
-                        <h3 class="card-title">Mes Groupes</h3>
+                        <h3 class="card-title">Mes Retrospective</h3>
 
                     </div>
                     <div class="card-body">
@@ -40,16 +40,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($Allretros as $Allretro)
+                                    @foreach($retros as $retro)
                                         <tr>
                                             <td>
                                                 <div class="flex flex-col gap-2">
                                                         <span class="leading-none font-medium text-sm text-gray-900">
-                                                           <a href="{{ route('retro.show', ['id' => $Allretro->id]) }}">{{ $Allretro->name }}</a>
+                                                           <a href="{{ route('retro.show', ['id' => $retro->id]) }}">{{ $retro->name }}</a>
                                                         </span>
                                                 </div>
                                             </td>
-                                            <td>{{ $Allretro->promotion }}</td>
+                                            <td>{{ $retro->promotion }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -111,13 +111,42 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="lg:col-span-1 mt-5">
+                    <div class="card h-full">
+                        <div class="card-header">
+                            <h3 class="card-title">Supprimer Une Retrospective</h3>
+                        </div>
+                        <div class="card-body flex flex-col gap-5">
+
+                            <form action="{{ route('retro.delete') }}" method="post" >
+                                @csrf
+                                <x-forms.dropdown
+                                    name="promotion"
+                                    :label="__('Promotion')"
+                                    class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+
+                                >
+                                    @foreach($cohorts as $cohort)
+                                        <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
+                                    @endforeach
+                                </x-forms.dropdown>
+                                <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                    {{ __('Supprimer') }}
+                                </x-forms.primary-button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
         @else
             <div class="lg:col-span-1">
                 <div class="card h-full">
                     <div class="card-header">
-                        <h3 class="card-title">Vous n'avez pas la permission de modifier les groupes....</h3>
+                        <h3 class="card-title">Vous n'avez pas la permission de modifier les Retrospective....</h3>
                     </div>
                 </div>
             </div>

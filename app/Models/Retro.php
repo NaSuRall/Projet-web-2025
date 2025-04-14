@@ -14,6 +14,9 @@ class Retro extends Model
         'promotion',
         'creator_id',
     ];
-
+    public function cohort()
+    {
+        return $this->belongsTo(Cohort::class);
+    }
 
 }

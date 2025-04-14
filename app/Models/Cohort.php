@@ -19,6 +19,10 @@ class Cohort extends Model
     {
         return $this->belongsToMany(User::class, 'user_cohorts', 'cohorts_id', 'user_id');
     }
+    public function retros()
+    {
+        return $this->hasMany(Retro::class);
+    }
 
 
 }

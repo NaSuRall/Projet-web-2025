@@ -47,7 +47,7 @@
     <!-- Wrapper -->
     <div class="flex flex-col lg:flex-row grow pt-[--tw-header-height] lg:pt-0">
         <!-- Sidebar -->
-        <x-main.sidebar :groups="$groups" />
+        <x-main.sidebar :groups="$groups" :retro="$retro" />
         <!-- End of Sidebar -->
 
         <!-- Main -->
