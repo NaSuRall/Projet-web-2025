@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Board;
 use App\Models\Cohort;
 use App\Models\Group;
 use App\Models\Retro;
@@ -22,7 +23,7 @@ class RetroController extends Controller
     public function index() {
         $cohorts = Cohort::all();
         $user = Auth::user();
-
+        $boards = Board::all();
         if ($user->role === 'student') {
             $cohortIds = $user->cohorts->pluck('id');
             $retros = Retro::whereIn('promotion', $cohortIds)->get();

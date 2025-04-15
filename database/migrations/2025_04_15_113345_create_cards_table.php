@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('cards', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->id();
-            $table->string('title');
-            $table->string('board_id');
-            $table->integer('position')->default(0);
-            $table->foreignId('retro_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->string('description');
+            $table->integer('position');
+            $table->unsignedBigInteger('column_id');
             $table->timestamps();
+
+
+            $table->foreign('column_id')->references('id')->on('columns');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('cards');
     }
 };
