@@ -29,9 +29,10 @@
 
                     <!-- FORM POUR RECHERCHE BAR -->
                         <form method="GET" action="{{ route('group.index') }}" class="mb-4 flex gap-2">
-                            <input type="text" name="search" placeholder="Rechercher un utilisateur..."
+                            <x-forms.input type="text" name="search" placeholder="Rechercher un utilisateur..."
                                    value="{{ request('search') }}"
-                                   class="input input-bordered w-full max-w-xs" />
+                                    />
+
                             <button type="submit" class="btn btn-primary">Rechercher</button>
                         </form>
 
@@ -105,6 +106,7 @@
 
                 </div>
             </div>
+
         </div>
 
 

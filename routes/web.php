@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MessageSent;
 use App\Http\Controllers\CohortController;
 use App\Http\Controllers\CommonLifeController;
 use App\Http\Controllers\DashboardController;
@@ -52,6 +53,14 @@ Route::middleware('auth')->group(function () {
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
+
+
+
+        // test
+        Route::get('/test-pusher', function () {
+            broadcast(new MessageSent('Hello depuis Laravel !'));
+            return 'Événement envoyé !';
+        });
     });
 
 });

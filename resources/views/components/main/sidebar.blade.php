@@ -205,7 +205,7 @@
 
                         </span>
                     </div>
-                    <div class="menu-accordion gap-px ps-7">
+                    <div class="menu-accordion gap-2 ps-7">
                         <div class="menu-item">
                             <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
                                href="{{ route('retro.index') }}">
@@ -219,9 +219,9 @@
                         @if($retro)
                             @foreach($retro as $retros)
                                 <div class="menu-item">
-                                    <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                                       href="#">
-                                        <span class="menu-title text-2sm   text-gray-800 menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
+                                    <a class="menu-link py-2 px-2.5  rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200 text-green-500"
+                                       href="#" style="background-color: #00FF9940">
+                                        <span class="menu-title text-2sm   menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
                                             {{ $retros->name }} - Promo : {{ $retros->promotion }}
                                         </span>
 

@@ -27,7 +27,7 @@ class RetroTemplateController extends Controller
     public function create(Request $request){
         $name = $request->input('name');
         $promotion = $request->input('promotion');
-        $users = UserCohort::where('cohorts_id', $promotion)->get();
+          $users = UserCohort::where('cohorts_id', $promotion)->get();
 
 
         $retro = Retro::create([

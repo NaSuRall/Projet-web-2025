@@ -35,5 +35,21 @@
             </div>
         </div>
     </div>
+
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+        Pusher.logToConsole = true;
+
+        const pusher = new Pusher('fb0c7dade152fa475497', {
+            cluster: 'eu',
+            forceTLS: true
+        });
+
+        const channel = pusher.subscribe('chat');
+        channel.bind('App\\Events\\MessageSent', function(data) {
+            console.log('Message reçu :', data);
+            alert('Message : ' + data.message);
+        });
+    </script>
     <!-- end: grid -->
 </x-app-layout>

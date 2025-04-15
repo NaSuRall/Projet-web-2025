@@ -29,7 +29,6 @@ class GroupController extends Controller
         }
 
         if ($search) {
-
             // recherche pour sql aussi avec % 'Like en sql'
             $groupSearch = Group::whereHas('users', function ($query) use ($search) {
                 $query->where('first_name', 'like', "%$search%")

@@ -44,7 +44,7 @@ class RetroController extends Controller
 
         $groups = Group::all();
         $cohorts = Cohort::all();
-        $Allretros = Retro::all();
-        return view('pages.retros.index', compact('groups','cohorts','Allretros'));
+        $retros = Retro::all();
+        return view('pages.retros.index', compact('groups','cohorts','retros'));
     }
 }
