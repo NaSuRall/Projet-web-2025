@@ -13,5 +13,6 @@ class Card extends Model
         'name',
         'description',
         'position',
+        'column_id'
     ];
 }

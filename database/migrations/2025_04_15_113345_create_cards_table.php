@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('position');
+            $table->integer('position')->nullable();
             $table->unsignedBigInteger('column_id');
             $table->timestamps();
 

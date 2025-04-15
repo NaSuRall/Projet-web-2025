@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
         // Retro Template
         Route::get('retros/group/{id}', [RetroTemplateController::class, 'index'])->name('retro.show');
         Route::post('retros/createColumn', [RetroTemplateController::class, 'createColumn'])->name('retro.createColumn');
+        Route::post('retros/createCard', [RetroTemplateController::class, 'createCard'])->name('retro.createCard');
 
 
         // Common life

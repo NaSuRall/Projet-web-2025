@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
-
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('board_id');

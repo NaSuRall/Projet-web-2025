@@ -19,4 +19,17 @@ class Retro extends Model
         return $this->belongsTo(Cohort::class);
     }
 
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
+
+    public function column()
+    {
+        return $this->belongsTo(Column::class);
+    }
+    public function board()
+    {
+        return $this->hasOne(Board::class);
+    }
 }
