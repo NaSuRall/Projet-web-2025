@@ -90,12 +90,13 @@
                         <!-- Formulaire -->
                         <form action="{{ route('retro.create') }}" method="post" >
                             @csrf
-                            <x-forms.input type="texte" name="name" :label="__('Nom Retro')" />
-
+                            <label class="form-label font-normal text-gray-900 ">Nom de la Retrospective</label>
+                            <input type="text" name="name" class="input" required>
                             <x-forms.dropdown
                                 name="promotion"
                                 :label="__('Quel promotion ?')"
                                 class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+
                             >
                                 @foreach($cohorts as $cohort)
                                     <option value="{{ $cohort->id  }}">{{ $cohort->name }}</option>
