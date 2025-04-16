@@ -55,7 +55,8 @@ Route::middleware('auth')->group(function () {
         Route::get('retros/group/{id}', [RetroTemplateController::class, 'index'])->name('retro.show');
         Route::post('retros/createColumn', [RetroTemplateController::class, 'createColumn'])->name('retro.createColumn');
         Route::post('retros/createCard', [RetroTemplateController::class, 'createCard'])->name('retro.createCard');
-
+        Route::delete('/card/{id}', [RetroTemplateController::class, 'destroyCard'])->name('card.delete');
+        Route::delete('/column/{id}', [RetroTemplateController::class, 'destroyColumn'])->name('column.delete');
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');

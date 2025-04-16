@@ -24,6 +24,7 @@ class RetroController extends Controller
         $cohorts = Cohort::all();
         $user = Auth::user();
         $boards = Board::all();
+
         if ($user->role === 'student') {
             $cohortIds = $user->cohorts->pluck('id');
             $retros = Retro::whereIn('promotion', $cohortIds)->get();

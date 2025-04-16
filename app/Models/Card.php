@@ -10,9 +10,15 @@ class Card extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'description',
         'position',
-        'column_id'
+        'column_id',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

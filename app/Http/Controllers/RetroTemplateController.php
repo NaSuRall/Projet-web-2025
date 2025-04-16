@@ -55,15 +55,30 @@ class RetroTemplateController extends Controller
         return redirect()->back();
     }
 
-    public function createCard(Request $request){
-        $nameCard = $request->input('nameCard');
-        $textarea = $request->input('textarea');
-        $column_id = $request->input('column_id');
-        Card::create([
-            'name' => $nameCard,
-            'description' => $textarea,
-            'column_id' => $column_id,
-        ]);
+    public function createCard(Request $request)
+    {
+        $card = new Card();
+        $card->column_id = $request->column_id;
+        $card->user_id = $request->user_id;
+        $card->description = $request->textarea;
+        $card->save();
+
+        return response()->json($card);
+    }
+
+    public function destroyCard($id)
+    {
+        $card = Card::findOrFail($id);
+        $card->delete();
         return redirect()->back();
     }
+
+    public function destroyColumn($id)
+    {
+        $column = Column::findOrFail($id);
+        $column->cards()->delete();
+        $column->delete();
+        return redirect()->back();
+    }
+
 }

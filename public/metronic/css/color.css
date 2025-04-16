@@ -1,0 +1,47 @@
+:root {
+    --tw-primary-light: #3b82f6;
+    --tw-success-light: #22c55e;
+    --tw-info-light: #06b6d4;
+    --tw-danger-light: #ef4444;
+    --tw-warning-light: #f59e0b;
+    --tw-purple-light: #8b5cf6;
+}
+
+.card:nth-child(1) {
+    background-color: var(--tw-primary-light);
+}
+.card:nth-child(2) {
+    background-color: var(--tw-success-light);
+}
+.card:nth-child(3) {
+    background-color: var(--tw-info-light);
+}
+.card:nth-child(4) {
+    background-color: var(--tw-danger-light);
+}
+.card:nth-child(5) {
+    background-color: var(--tw-warning-light);
+}
+.card:nth-child(6) {
+    background-color: var(--tw-purple-light);
+}
+
+/* Pour que ça boucle automatiquement après la 6e */
+.card:nth-child(7n+1) {
+    background-color: var(--tw-primary-light);
+}
+.card:nth-child(7n+2) {
+    background-color: var(--tw-success-light);
+}
+.card:nth-child(7n+3) {
+    background-color: var(--tw-info-light);
+}
+.card:nth-child(7n+4) {
+    background-color: var(--tw-danger-light);
+}
+.card:nth-child(7n+5) {
+    background-color: var(--tw-warning-light);
+}
+.card:nth-child(7n+6) {
+    background-color: var(--tw-purple-light);
+}

@@ -676,6 +676,17 @@ video {
   --tw-coal-600: #0B0C10;
   --tw-coal-black: #000000;
   --tw-coal-clarity: rgba(24, 25, 31, 0.50);
+
+    --tw-pastel-pink: #f7c6d7; /* Rose pastel */
+    --tw-pastel-blue: #a2cffe; /* Bleu pastel */
+    --tw-pastel-green: #c4e1c1; /* Vert pastel */
+    --tw-pastel-yellow: #f9e0a1; /* Jaune pastel */
+    --tw-pastel-purple: #d1a6e1; /* Violet pastel */
+    --tw-pastel-cyan: #a3e4f2; /* Cyan pastel */
+    --tw-pastel-orange: #ffd1b3; /* Orange pastel */
+    --tw-pastel-peach: #f9d0b6; /* Pêche pastel */
+    --tw-pastel-lavender: #e3c2f0; /* Lavande pastel */
+    --tw-pastel-mint: #b3e1d9; /* Menthe pastel */
 }
 
 :root, .light {
