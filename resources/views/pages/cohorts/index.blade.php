@@ -42,21 +42,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($cohorts as $cohort)
                                         <tr>
-                                        <td>
-                                            <div class="flex flex-col gap-2">
-                                                <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                                                   href="{{ route('cohort.show', 1) }}">
-                                                    Promotion B1
-                                                </a>
-                                                <span class="text-2sm text-gray-700 font-normal leading-3">
-                                                    Cergy
+                                            <td>
+                                                <div class="flex flex-col gap-2">
+                                                    <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
+                                                       href="{{ route('cohort.show', 1) }}">
+                                                      {{ $cohort->name }}
+                                                    </a>
+                                                    <span class="text-2sm text-gray-700 font-normal leading-3">
+                                                   {{ $cohort->school_id }}
                                                 </span>
-                                            </div>
-                                        </td>
-                                        <td>2024-2025</td>
-                                        <td>34</td>
-                                    </tr>
+                                                </div>
+                                            </td>
+                                            <td>...</td>
+                                            <td>...</td>
+                                        </tr>
+
+                                    @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

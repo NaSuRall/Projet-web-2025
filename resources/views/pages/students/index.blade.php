@@ -43,14 +43,16 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+
                                         <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($Allusers as $Alluser)
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>12/02/2000</td>
+                                            <td> {{ $Alluser->last_name }}</td>
+                                            <td> {{ $Alluser->first_name }}</td>
+                                            <td> {{ $Alluser->birth_date }}</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">
@@ -64,22 +66,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>02/12/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
