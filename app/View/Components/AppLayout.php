@@ -15,7 +15,7 @@ class AppLayout extends Component
     public function render(): View
     {
         $groups = Group::all();
-        $retro = Retro::all();
-        return view('layouts.app', compact('groups', 'retro'));
+        $retros = Retro::all();
+        return view('layouts.app', compact('groups', 'retros'));
     }
 }

@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
         // Retro
         Route::get('retros', [RetroController::class, 'index'])->name('retro.index');
         Route::post('retros/create', [RetroTemplateController::class, 'create'])->name('retro.create');
-        Route::post('retros/delete', [RetroController::class, 'delete'])->name('retro.delete');
+        Route::delete('retros/delete', [RetroController::class, 'delete'])->name('retro.delete');
 
 
         // Retro Template

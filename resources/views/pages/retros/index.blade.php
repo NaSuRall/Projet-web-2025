@@ -49,7 +49,7 @@
                                                         </span>
                                                 </div>
                                             </td>
-                                            <td>{{ $retro->promotion }}</td>
+                                            <td>{{ $retro->cohort?->name ?? 'Promotion inconnue' }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -91,7 +91,7 @@
                         <form action="{{ route('retro.create') }}" method="post" >
                             @csrf
                             <label class="form-label font-normal text-gray-900 ">Nom de la Retrospective</label>
-                            <input type="text" name="name" class="input" required>
+                            <input type="text" name="name"  class="input" maxlength="20" required>
                             <x-forms.dropdown
                                 name="promotion"
                                 :label="__('Quel promotion ?')"
@@ -106,7 +106,7 @@
                             </x-forms.dropdown>
 
                             <input type="hidden" name="creator_id" value="{{ auth()->user()->id }}">
-                            <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                            <x-forms.primary-button class="w-full py-3 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                 {{ __('Crée une Retro') }}
                             </x-forms.primary-button>
                         </form>
@@ -122,6 +122,7 @@
 
                             <form action="{{ route('retro.delete') }}" method="post" >
                                 @csrf
+                                @method('DELETE')
                                 <x-forms.dropdown
                                     name="promotion"
                                     :label="__('Promotion')"
@@ -132,7 +133,7 @@
                                         <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
                                     @endforeach
                                 </x-forms.dropdown>
-                                <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                <x-forms.primary-button class="w-full py-3 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                     {{ __('Supprimer') }}
                                 </x-forms.primary-button>
                             </form>

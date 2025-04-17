@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'email'         => 'student@codingfactory.com',
             'password'      => Hash::make('123456'),
             'role'          => 'student',
+            'bilan_note'    => 12
         ]);
 
 

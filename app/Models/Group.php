@@ -16,4 +16,8 @@ class Group extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function cohort()
+    {
+        return $this->belongsTo(Cohort::class, 'promotion');
+    }
 }

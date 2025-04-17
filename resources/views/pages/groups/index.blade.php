@@ -63,28 +63,41 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">user id</span>
+                                                <span class="sort-label">Note bilan</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php
+                                        $role = Auth::user()->role ?? null;
+                                    @endphp
                                     @foreach($groups as $group)
                                         @foreach($group->users as $user)
                                             <tr>
                                                 <td>
                                                     <div class="flex flex-col gap-2">
                                                         <span class="leading-none font-medium text-sm text-gray-900">
-                                                            {{ $user->first_name }} {{ $user->last_name }}
+                                                             {{ $user->first_name }} {{ $user->last_name }}
                                                         </span>
                                                     </div>
                                                 </td>
-                                                <td>{{ $group->promotion }}</td>
+                                                <td>{{ $group->cohort?->name ?? 'Promotion inconnue' }}</td>
                                                 <td>Groupe {{ $group->group_number }}</td>
-                                                <td>{{ $user->id }}</td>
-                                            </tr>
 
+                                                <!-- Afficher la colonne 'bilan_note' uniquement pour l'utilisateur connecté -->
+                                                @if(auth()->user()->id == $user->id)
+                                                    <td>{{ $user->bilan_note }}</td>
+
+                                                @elseif(in_array($role , ['admin', 'teacher']))
+                                                    <td>{{ $user->bilan_note }}</td>
+                                                @else
+                                                    <td class="bg-gray-100 blur-lg flex justify-center items-center" style=" filter: blur(2px);">
+                                                        <span class="opacity-0">🔒</span>
+                                                    </td>
+                                                @endif
+                                            </tr>
                                         @endforeach
                                     @endforeach
                                     </tbody>
@@ -127,7 +140,8 @@
                                 type="number"
                                 name="number"
                                 :label="__('Personnes par groups')"
-                                class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                placeholder="2-10"
+                                class="w-full   rounded-md  focus:ring-indigo-500 focus:border-indigo-500"
                             />
                             <x-forms.dropdown
                                 name="promotion"
@@ -166,7 +180,7 @@
                                         <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
                                     @endforeach
                                 </x-forms.dropdown>
-                                <x-forms.primary-button class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                <x-forms.primary-button class="w-full py-3 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                     {{ __('Supprimer') }}
                                 </x-forms.primary-button>
                             </form>

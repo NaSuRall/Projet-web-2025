@@ -16,7 +16,7 @@ class Retro extends Model
     ];
     public function cohort()
     {
-        return $this->belongsTo(Cohort::class);
+        return $this->belongsTo(Cohort::class, 'promotion');
     }
 
     public function cards()

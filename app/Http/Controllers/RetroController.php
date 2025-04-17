@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use App\Models\Card;
 use App\Models\Cohort;
+use App\Models\Column;
 use App\Models\Group;
 use App\Models\Retro;
 use App\Models\UserCohort;
@@ -43,10 +45,6 @@ class RetroController extends Controller
     {
         $promotion = $request->input('promotion');
         Retro::where('promotion', $promotion)->delete();
-
-        $groups = Group::all();
-        $cohorts = Cohort::all();
-        $retros = Retro::all();
-        return view('pages.retros.index', compact('groups','cohorts','retros'));
+        return redirect()->back();
     }
 }

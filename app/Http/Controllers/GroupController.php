@@ -23,14 +23,14 @@ class GroupController extends Controller
         $search = $request->input('search');
         //filter les promos
         if ($promotionId) {
-            $groups = Group::where('promotion', $promotionId)->get();
+            $groups = Group::with('cohort')->where('promotion', $promotionId)->get();
         } else {
             $groups = Group::all();
         }
 
         if ($search) {
             // recherche pour sql aussi avec % 'Like en sql'
-            $groupSearch = Group::whereHas('users', function ($query) use ($search) {
+            $groupSearch = Group::with('cohort')->whereHas('users', function ($query) use ($search) {
                 $query->where('first_name', 'like', "%$search%")
                     ->orWhere('last_name', 'like', "%$search%");
             })->get();
@@ -49,6 +49,12 @@ class GroupController extends Controller
         $users = User::whereHas('cohorts', function($query) use ($promotion) {
             $query->where('cohorts_id', $promotion);
         })->get();
+
+        if ($number < 2) {
+            return redirect()->back()->withErrors("error nombre trop petit");
+        }elseif ($number > 10) {
+            return redirect()->back()->withErrors("error nombre trop grand");
+        }
 
         // Supprimer les groupes existants
         Group::where('promotion', $promotion)->delete();

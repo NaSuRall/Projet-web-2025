@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('retro_id')->references('id')->on('retros');
+            $table->foreign('retro_id')->references('id')->on('retros')->onDelete('cascade');
             $table->foreign('cohort_id')->references('id')->on('cohorts');
 
         });

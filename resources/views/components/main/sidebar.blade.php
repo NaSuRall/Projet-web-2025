@@ -216,28 +216,31 @@
                         </div>
                         <!-- @todo CETTE PARTIE EST A GENERER DEPUIS LA BDD -->
 
-                        @if($retro)
-                            @foreach($retro as $retros)
-                                <div class="menu-item">
-                                    <a class="menu-link py-2 px-2.5  rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200 text-green-500"
-                                       href="#" style="background-color: #00FF9940">
-                                        <span class="menu-title text-2sm   menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
-                                            {{ $retros->name }} - Promo : {{ $retros->promotion }}
+                        @php
+                            $role = Auth::user()->role ?? null;
+                        @endphp
+
+                        @if(in_array($role , ['admin']))
+                            @if($retros->count())
+                                @foreach($retros as $retro)
+                                    <div class="menu-item">
+                                        <a class="menu-link py-2 px-2.5 rounded-md border border-transparent text-green-500"
+                                        href="#" style="background-color: #00FF9940">
+                                            <span class="menu-title text-2sm">
+                                            {{ $retro->name }} - Promo : {{ $retro->promotion }}
+                                            </span>
+                                        </a>
+                                 </div>
+                              @endforeach
+                            @else
+                                <a class="menu-link py-2 px-2.5 rounded-md border border-transparent"
+                                href="{{ route('group.index') }}">
+                                        <span class="menu-title text-2sm text-gray-800">
+                                            Aucune rétro disponible
                                         </span>
-
-                                    </a>
-                                </div>
-                            @endforeach
-                        @else
-                            <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                               href="{{ route('group.index') }}">
-                                <span class="menu-title text-2sm text-gray-800 menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
-                                    Toutes les retros
-                                </span>
-                            </a>
+                                </a>
+                           @endif
                         @endif
-
-
                         <!-- FIN -->
                     </div>
                 </div>

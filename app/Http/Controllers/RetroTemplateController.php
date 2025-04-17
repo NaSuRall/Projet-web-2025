@@ -30,6 +30,7 @@ class RetroTemplateController extends Controller
         $promotion = $request->input('promotion');
           $users = UserCohort::where('cohorts_id', $promotion)->get();
 
+
         $retro = Retro::create([
             'name' => $name,
             'promotion' => $promotion,
