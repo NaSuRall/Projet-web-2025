@@ -18,12 +18,10 @@ class Retro extends Model
     {
         return $this->belongsTo(Cohort::class, 'promotion');
     }
-
     public function cards()
     {
         return $this->hasMany(Card::class);
     }
-
     public function column()
     {
         return $this->belongsTo(Column::class);
@@ -31,5 +29,9 @@ class Retro extends Model
     public function board()
     {
         return $this->hasOne(Board::class);
+    }
+    public function boards()
+    {
+        return $this->hasMany(Board::class);
     }
 }

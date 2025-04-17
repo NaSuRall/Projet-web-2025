@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Cohort;
 use App\Models\Group;
 use App\Models\Retro;
 use Illuminate\View\Component;
@@ -16,6 +17,7 @@ class AppLayout extends Component
     {
         $groups = Group::all();
         $retros = Retro::all();
-        return view('layouts.app', compact('groups', 'retros'));
+        $cohorts = Cohort::all();
+        return view('layouts.app', compact('groups', 'retros','cohorts'));
     }
 }

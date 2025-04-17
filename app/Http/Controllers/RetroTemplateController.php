@@ -26,10 +26,40 @@ class RetroTemplateController extends Controller
 
 
     public function create(Request $request){
+
         $name = $request->input('name');
         $promotion = $request->input('promotion');
-          $users = UserCohort::where('cohorts_id', $promotion)->get();
+        $users = UserCohort::where('cohorts_id', $promotion)->get();
 
+        if ($request->has('retroRapide')){
+            $retro = Retro::create([
+                'name' => $name,
+                'promotion' => $promotion,
+                'creator_id' => $request->input('creator_id'),
+            ]);
+
+            $board = Board::create([
+                'name' => $name,
+                'retro_id' => $retro->id,
+                'cohort_id' => $promotion,
+            ]);
+
+            Column::create([
+                'name' => 'J\'ai aimer',
+                'board_id' => $board->id,
+            ]);
+
+            Column::create([
+                'name' => 'Je n\'ai pas aimer',
+                'board_id' => $board->id,
+            ]);
+
+            Column::create([
+                'name' => 'A modifier',
+                'board_id' => $board->id,
+            ]);
+            return redirect()->back()->with(compact('board'));
+        }
 
         $retro = Retro::create([
             'name' => $name,
@@ -42,6 +72,7 @@ class RetroTemplateController extends Controller
             'retro_id' => $retro->id,
             'cohort_id' => $promotion,
         ]);
+
         return redirect()->back()->with(compact('users','board'));
     }
 

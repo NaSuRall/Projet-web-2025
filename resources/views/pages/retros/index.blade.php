@@ -72,10 +72,6 @@
             </div>
         </div>
 
-        <!-- Formulaire à droite avec position sticky -->
-
-
-
         @php
             $role = Auth::user()->role ?? null;
         @endphp
@@ -90,56 +86,68 @@
                         <!-- Formulaire -->
                         <form action="{{ route('retro.create') }}" method="post" >
                             @csrf
+                            <input type="hidden" name="creator_id" value="{{ auth()->user()->id }}">
                             <label class="form-label font-normal text-gray-900 ">Nom de la Retrospective</label>
                             <input type="text" name="name"  class="input" maxlength="20" required>
                             <x-forms.dropdown
                                 name="promotion"
                                 :label="__('Quel promotion ?')"
                                 class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-
                             >
                                 @foreach($cohorts as $cohort)
                                     <option value="{{ $cohort->id  }}">{{ $cohort->name }}</option>
                                 @endforeach
-
-
                             </x-forms.dropdown>
 
-                            <input type="hidden" name="creator_id" value="{{ auth()->user()->id }}">
-                            <x-forms.primary-button class="w-full py-3 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                            <div class="flex items-center mt-5">
+                                <label class="w-full py-5 px5 mt-5 bg-indigo-600">
+                                    Retro rapide <i class="fa-solid fa-bolt " style="color: #ecec0d;"></i> <input type="checkbox" name="retroRapide" >
+                                </label>
+                            </div>
+
+
+                            <x-forms.primary-button class="w-full py-4 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                 {{ __('Crée une Retro') }}
                             </x-forms.primary-button>
                         </form>
+
+                        <div class="lg:col-span-1 mt-5">
+                            <div class="card h-full">
+                                <div class="card-header">
+                                    <h3 class="card-title">Supprimer Une Retrospective</h3>
+                                </div>
+                                <div class="card-body flex flex-col gap-5">
+
+                                    <form action="{{ route('retro.delete') }}" method="post" >
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-forms.dropdown
+                                            name="promotion"
+                                            :label="__('Promotion')"
+                                            class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+
+                                        >
+                                            @foreach($cohorts as $cohort)
+                                                <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
+                                            @endforeach
+                                        </x-forms.dropdown>
+                                        <x-forms.primary-button class="w-full py-3 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                            {{ __('Supprimer') }}
+                                        </x-forms.primary-button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
 
-                <div class="lg:col-span-1 mt-5">
-                    <div class="card h-full">
-                        <div class="card-header">
-                            <h3 class="card-title">Supprimer Une Retrospective</h3>
-                        </div>
-                        <div class="card-body flex flex-col gap-5">
 
-                            <form action="{{ route('retro.delete') }}" method="post" >
-                                @csrf
-                                @method('DELETE')
-                                <x-forms.dropdown
-                                    name="promotion"
-                                    :label="__('Promotion')"
-                                    class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
 
-                                >
-                                    @foreach($cohorts as $cohort)
-                                        <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
-                                    @endforeach
-                                </x-forms.dropdown>
-                                <x-forms.primary-button class="w-full py-3 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
-                                    {{ __('Supprimer') }}
-                                </x-forms.primary-button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+
+
+
 
 
             </div>

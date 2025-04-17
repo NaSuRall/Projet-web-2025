@@ -44,7 +44,18 @@ class RetroController extends Controller
     public function delete(Request $request)
     {
         $promotion = $request->input('promotion');
-        Retro::where('promotion', $promotion)->delete();
-        return redirect()->back();
+
+        $retros = Retro::where('promotion', $promotion)->with('boards.columns')->get();
+
+        foreach ($retros as $retro) {
+            foreach ($retro->boards as $board) {
+                $board->columns()->delete(); // Supprime les colonnes
+            }
+
+            $retro->boards()->delete(); // Supprime les boards
+            $retro->delete(); // Supprime le rétro
+        }
+
+        return redirect()->back()->with('success', 'Rétrospectives supprimées.');
     }
 }
