@@ -58,7 +58,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('/card/{id}', [RetroTemplateController::class, 'destroyCard'])->name('card.delete');
         Route::delete('/column/{id}', [RetroTemplateController::class, 'destroyColumn'])->name('column.delete');
 
-
         // Retro Rapide
         Route::post('retros/createrapide', [RetroController::class, 'createRetroRapide'])->name('retroRapide.create');
         // Common life
