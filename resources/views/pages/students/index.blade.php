@@ -95,6 +95,35 @@
                 </div>
                 <div class="card-body flex flex-col gap-5">
                     Formulaire à créer
+
+
+                    <div class="flex flex-col gap-5">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Nom</span>
+                            </label>
+                            <input type="text" class="input input-bordered" placeholder="Nom" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Prénom</span>
+                            </label>
+                            <input type="text" class="input input-bordered" placeholder="Prénom" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Email</span>
+                            </label>
+                            <input type="email" class="input input-bordered" placeholder="Email" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Date de naissance</span>
+                            </label>
+                            <input type="date" class="input input-bordered" placeholder="Date de naissance" />
+                        </div>
+                    </div>
+
                     <!-- @todo A compléter -->
                 </div>
             </div>

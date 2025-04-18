@@ -15,12 +15,16 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
+
+
+    // function to show groups page
     public function index(Request $request) {
         $promotionId = $request->input('promotion');
         $cohorts = Cohort::all();
         $users = collect();
         $groups = Group::all();
         $search = $request->input('search');
+
         //filter les promos
         if ($promotionId) {
             $groups = Group::with('cohort')->where('promotion', $promotionId)->get();
@@ -41,15 +45,21 @@ class GroupController extends Controller
         return view('pages.groups.index', compact('cohorts', 'users','groups','groupSearch'));
     }
 
+
+    // function to create groups
     public function create(Request $request)
     {
+        // get promotion id from request
         $promotion = $request->input('promotion');
+        // get number of groups from request
         $number = $request->input('number');
 
+        // get all users of the promotion
         $users = User::whereHas('cohorts', function($query) use ($promotion) {
             $query->where('cohorts_id', $promotion);
         })->get();
 
+        // if number is not between 2 and 10
         if ($number < 2) {
             return redirect()->back()->withErrors("error nombre trop petit");
         }elseif ($number > 10) {
@@ -59,13 +69,19 @@ class GroupController extends Controller
         // Supprimer les groupes existants
         Group::where('promotion', $promotion)->delete();
 
+        // create groups
         $groupNumber = 1;
         $groupUsers = [];
 
+        // for each user, create a group with the same number of users
         foreach ($users as $user) {
+            // if the number of users in the group is less than the number of users in the promotion, add the user to the group
             if (count($groupUsers) < $number) {
                 $groupUsers[] = $user;
-            } else {
+            }
+            // else create a new group with the same number of users as the previous group and add the user to the new group
+            else
+            {
                 $group = Group::create([
                     'promotion' => $promotion,
                     'group_number' => $groupNumber,
@@ -77,7 +93,7 @@ class GroupController extends Controller
                 $groupNumber++;
             }
         }
-
+            // if there are still users in the group, create a new group with the remaining users
         if (!empty($groupUsers)) {
             $group = Group::create([
                 'promotion' => $promotion,
@@ -97,6 +113,7 @@ class GroupController extends Controller
 
 
 
+    // function to delete groups
     public function clear(Request $request)
     {
         $promotion = $request->input('promotion');

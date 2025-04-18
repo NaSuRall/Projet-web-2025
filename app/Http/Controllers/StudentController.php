@@ -11,7 +11,9 @@ class StudentController extends Controller
 {
     public function index()
     {
+        // take all users
         $Allusers = User::all();
+        // return view to variable $Allusers
         return view('pages.students.index',compact('Allusers'));
     }
 }

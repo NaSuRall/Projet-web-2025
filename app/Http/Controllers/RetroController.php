@@ -22,40 +22,51 @@ class RetroController extends Controller
      *
      * @return Factory|View|Application|object
      */
+
+
+    // function to show retros page
     public function index() {
         $cohorts = Cohort::all();
         $user = Auth::user();
         $boards = Board::all();
 
+        // if user is student
         if ($user->role === 'student') {
             $cohortIds = $user->cohorts->pluck('id');
+            // get all retros of the user's cohorts'
             $retros = Retro::whereIn('promotion', $cohortIds)->get();
         }  elseif ($user->role === 'teacher') {
+            // get all retros of the user's cohorts'
             $retros = Retro::where('creator_id', $user->id)->get();
         }
         else {
+            // get all retros
             $retros = Retro::all();
         }
-
+        // return view retros.index with retros and cohorts
         return view('pages.retros.index', compact('retros', 'cohorts'));
     }
 
 
+
+    // function to delete retros
     public function delete(Request $request)
     {
+        // get promotion id from request
         $promotion = $request->input('promotion');
-
+        // get all retros of the promotion
         $retros = Retro::where('promotion', $promotion)->with('boards.columns')->get();
 
+        // boucle for each retro to delete all boards and columns
         foreach ($retros as $retro) {
             foreach ($retro->boards as $board) {
-                $board->columns()->delete(); // Supprime les colonnes
+                $board->columns()->delete();
             }
 
-            $retro->boards()->delete(); // Supprime les boards
-            $retro->delete(); // Supprime le rétro
+            $retro->boards()->delete();
+            $retro->delete();
         }
-
+            // return back with success message
         return redirect()->back()->with('success', 'Rétrospectives supprimées.');
     }
 }
