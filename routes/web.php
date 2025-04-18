@@ -39,32 +39,45 @@ Route::middleware('auth')->group(function () {
         // Knowledge
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');
 
+
+
+
         // Groups
+        // Route for show the groups page
         Route::get('groups', [GroupController::class, 'index'])->name('group.index');
+        // Route for create a new group
         Route::get('groups/promotions', [GroupController::class, 'create'])->name('group.create');
+        // Route for delete group
         Route::post('groups/delete', [GroupController::class, 'clear'])->name('group.clear');
 
+        // Route pour les retros
 
-        // Retro
+        // route show reto pages
         Route::get('retros', [RetroController::class, 'index'])->name('retro.index');
+        // route create retro template
         Route::post('retros/create', [RetroTemplateController::class, 'create'])->name('retro.create');
+        // Route for delete retro
         Route::delete('retros/delete', [RetroController::class, 'delete'])->name('retro.delete');
 
 
         // Retro Template
+
+        // Route for show the template retro with id
         Route::get('retros/group/{id}', [RetroTemplateController::class, 'index'])->name('retro.show');
+        // Route for create a new column
         Route::post('retros/createColumn', [RetroTemplateController::class, 'createColumn'])->name('retro.createColumn');
+        // Route for create a new card
         Route::post('retros/createCard', [RetroTemplateController::class, 'createCard'])->name('retro.createCard');
+        // Route for delete card with id on parameter
         Route::delete('/card/{id}', [RetroTemplateController::class, 'destroyCard'])->name('card.delete');
+        // Route for delete column with id on parameter
         Route::delete('/column/{id}', [RetroTemplateController::class, 'destroyColumn'])->name('column.delete');
 
-        // Retro Rapide
-        Route::post('retros/createrapide', [RetroController::class, 'createRetroRapide'])->name('retroRapide.create');
+
+
+
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
-
-
-
         // test
         Route::get('/test-pusher', function () {
             broadcast(new MessageSent('Hello depuis Laravel !'));

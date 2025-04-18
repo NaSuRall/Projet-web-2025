@@ -101,10 +101,14 @@
                             </x-forms.dropdown>
 
                             <div class="flex items-center mt-5">
-                                <label class="w-full py-5 px5 mt-5 bg-indigo-600">
-                                    Retro rapide <i class="fa-solid fa-bolt " style="color: #ecec0d;"></i> <input type="checkbox" name="retroRapide" >
+                                <label class="switch">
+                                 <span class="switch-label">
+                                   Retro rapide <i class="fa-solid fa-bolt " style="color: #ecec0d;"></i>
+                                 </span>
+                                    <input name="retroRapide" type="checkbox" value="1"/>
                                 </label>
                             </div>
+
 
 
                             <x-forms.primary-button class="w-full py-4 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
@@ -140,6 +144,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         @else
@@ -148,10 +153,8 @@
                      <div class="card-header">
                          <h3 class="card-title">Vous n'avez pas la permission de modifier les Retrospective....</h3>
                      </div>
-                  /div>
+                  </div>
              </div>
         @endif
     </div>
-   </div>
-
 </x-app-layout>

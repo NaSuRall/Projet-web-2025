@@ -29,6 +29,9 @@ Ce projet Laravel inclut la gestion des groupes, promotions, étudiants, rétro 
 
 - Creation d'une Retro Rapide
 
+- Utilisation des seeders et factory
+
+
 ---
 
 ## 💻 Organisation

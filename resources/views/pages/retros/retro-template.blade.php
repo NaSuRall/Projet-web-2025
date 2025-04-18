@@ -203,7 +203,43 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Oui je n'ai pas fait d'effort pour ca je n'avais plus le temps :') -->
+<!-- tu es le meilleur ;) -->
 <script>
     document.querySelectorAll('.form-create-card').forEach(form => {
         form.addEventListener('submit', async function(e) {
