@@ -9,11 +9,12 @@
 
     <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
         <div class="lg:col-span-2">
-
             <div class="grid">
                 <div class="card card-grid h-full min-w-full">
+
                     <div class="card-header">
                         <h3 class="card-title">Mes Groupes</h3>
+
                     <!-- FORM POUR FILTER PROMOTION -->
                         <form method="GET" action="{{ route('group.index') }}" class="mb-4 flex justify-center">
                             <select name="promotion" id="promotion" class="select select-sm w-48">
@@ -28,6 +29,7 @@
                         </form>
 
                     <!-- FORM POUR RECHERCHE BAR -->
+
                         <form method="GET" action="{{ route('group.index') }}" class="mb-4 flex gap-2">
                             <x-forms.input type="text" name="search" placeholder="Rechercher un utilisateur..."
                                    value="{{ request('search') }}"
@@ -37,6 +39,7 @@
                         </form>
 
                     </div>
+
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
@@ -86,7 +89,7 @@
                                                 <td>{{ $group->cohort?->name ?? 'Promotion inconnue' }}</td>
                                                 <td>Groupe {{ $group->group_number }}</td>
 
-                                                <!-- Afficher la colonne 'bilan_note' uniquement pour l'utilisateur connecté -->
+                                                <!-- Affichage de la colonne 'bilan_note' uniquement pour l'utilisateur connecté -->
                                                 @if(auth()->user()->id == $user->id)
                                                     <td>{{ $user->bilan_note }}</td>
 
@@ -116,16 +119,15 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
 
 
         @php
             $role = Auth::user()->role ?? null;
         @endphp
+        <!-- Si l'utilisateur est admin ou professeur, on affiche le formulaire -->
         @if(in_array($role, ['admin', 'teacher']))
             <div class="lg:col-span-1">
                 <div class="card h-full">
@@ -173,12 +175,12 @@
                                 <x-forms.dropdown
                                     name="promotion"
                                     :label="__('Promotion')"
-                                    class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                    class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
 
-                                >
                                     @foreach($cohorts as $cohort)
                                         <option value="{{ $cohort->id }}">{{ $cohort->name }}</option>
                                     @endforeach
+
                                 </x-forms.dropdown>
                                 <x-forms.primary-button class="w-full py-3 mt-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
                                     {{ __('Supprimer') }}
@@ -189,7 +191,7 @@
                 </div>
 
 
-
+        <!-- else show message-->
         @else
             <div class="lg:col-span-1">
                 <div class="card h-full">
