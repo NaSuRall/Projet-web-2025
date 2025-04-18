@@ -21,7 +21,7 @@ Ce projet Laravel inclut la gestion des groupes, promotions, étudiants, rétro 
 
 - Intégration de Pusher.js au projet (connexion fonctionnelle, mais non encore opérationnelle pour le Kanban).
 
-- Affichage dynamique des rétrospectives en cours dans la sidebar, ainsi que des promotions et groupes
+- Affichage dynamique des rétrospectives en cours dans la sidebar, ainsi que des promotions et groupes 
 
 - Utilisation des Seeders et Factory pour remplir la bdd
 
@@ -30,6 +30,9 @@ Ce projet Laravel inclut la gestion des groupes, promotions, étudiants, rétro 
 - Creation d'une Retro Rapide
 
 - Utilisation des seeders et factory
+
+- Affichage de tout les student dans la page student 
+
 
 
 ---
